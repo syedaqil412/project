@@ -1,0 +1,164 @@
+/**
+ * Program Purpose: To define the attributes of the Flower class
+ *
+ * Programmer: Syed Aqil Farihin
+ * Date: 20/2/2024
+ */
+public class Flower
+{
+//Declaration of the instance variables
+private String name;//rose
+private String color;
+private double price;
+private int quantity;
+    
+
+// Constructor without param
+public Flower()
+{
+    this.name = "";
+    this.color = "";
+    this.price = 0.0;
+    this.quantity = 0;
+}
+
+// constructor with param
+public Flower(String name, String color, double price, int quantity) 
+{
+    this.name = name;
+    this.color = color;
+    this.price = price;
+    this.quantity = quantity;
+}
+
+// Retrievers/accessors/getters
+public String getName() 
+{
+    return name;
+}//end of accessor
+
+public String getColor()
+{
+    return color;
+}//end of accessor
+
+public double getPrice() 
+{
+    return price;
+}//end of accessor
+
+public int getQuantity() 
+{
+    return quantity;
+}//end of accessor
+
+// Mutators for all data members
+public void setName(String name) 
+{
+    this.name = name;
+}//end of mutator
+
+public void setColor(String color) 
+{
+    this.color = color;
+}//end of mutator
+
+public void setPrice(double price) 
+{
+    this.price = price;
+}//end of mutator
+
+public void setQuantity(int quantity) 
+{
+    this.quantity = quantity;
+}//end of mutator
+
+// Method to calculate the value of the flower
+public double calcValue() 
+{
+    return price * quantity;
+}//end of calcValue
+
+//toString method
+public String toString()
+{
+    return "Name: " + name + 
+    "\nColor: " + color + 
+    "\nPrice: " + price + 
+    "\nQuantity: " + quantity;
+}//end of toString
+}
+
+/**
+ * Program Purpose:To demonstrate the implementation of instance variables and methods of the class name Magazine
+ *
+ * Programmer:Syed Aqil Farihin
+ * Date:20/2/2024
+ */
+
+//import the respective package
+import java.util.Scanner;
+
+public class FlowerShop 
+{
+    public static void main(String[] args) 
+    {
+        //Declaration of an array of size 10 named flowerArr
+        Flower[] flowerArr = new Flower[10];
+        
+        Scanner scanner = new Scanner(System.in);
+        int count = 0;
+
+        while (true) 
+        {
+            System.out.println("Enter 1 to add a flower, 2 to display all flowers, 3 to calculate and the total value of the flower inventory, 4 to search for a flower by name, or 0 to exit.");
+            int choice = scanner.nextInt();
+
+            switch (choice) 
+            {
+                case 1:
+                System.out.println("Enter the name of the flower:");
+                String name = scanner.next();
+                System.out.println("Enter the color of the flower:");
+                String color = scanner.next();
+                System.out.println("Enter the price of the flower(RM):");
+                double price = scanner.nextDouble();
+                System.out.println("Enter the quantity of the flower:");
+                int quantity = scanner.nextInt();
+
+                Flower flower = new Flower(name, color, price, quantity);
+                flowerArr[count] = flower;
+                count++;
+                break;
+                case 2:
+                    for (int i = 0; i < count; i++) 
+                    {
+                        System.out.println(flowerArr[i].toString());
+                    }
+                    break;
+                case 3:
+                    double totalValue = 0;
+
+                    for (int i = 0; i < count; i++) 
+                    {
+                        totalValue += flowerArr[i].calcValue();
+                    }
+
+                    System.out.println("Total value of the flower : " + totalValue);
+                    break;
+                case 4:
+                    System.out.println("Enter the name of the flower :");
+                    String searchName = scanner.next();
+
+                    for (int i = 0; i < count; i++) 
+                    {
+                        if (flowerArr[i].getName().equalsIgnoreCase(searchName)) 
+                        {
+                            System.out.println(flowerArr[i].toString());
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
